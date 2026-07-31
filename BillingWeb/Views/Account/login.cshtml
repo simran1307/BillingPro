@@ -1,0 +1,72 @@
+@model BillingWeb.Models.LoginViewModel
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h1>⚡ BillingPro</h1>
+
+        <p>Modern Billing Management System</p>
+
+        <form method="post">
+
+            <div class="mb-3">
+
+                <label asp-for="UserName">User Name</label>
+
+                <input asp-for="UserName"
+                       class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="Password">Password</label>
+
+                <input asp-for="Password"
+                       type="password"
+                       class="form-control" />
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary w-100">
+                Sign In
+            </button>
+
+        </form>
+
+        <br/>
+
+       @if (ViewBag.Message != null)
+{
+    <div class="alert alert-warning">
+
+        <strong>
+            @ViewBag.Message
+        </strong>
+
+        <br />
+
+<a asp-controller="Account" asp-action="Register" class="register-btn">
+            Register Now
+
+        </a>
+
+    </div>
+}
+
+
+       
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+    </div>
+
+</div>

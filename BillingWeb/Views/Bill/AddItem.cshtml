@@ -1,0 +1,67 @@
+@model BillingWeb.Models.AddItemViewModel
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="text-center mb-4">
+
+            <div class="logo-circle">
+                📦
+            </div>
+
+            <h2 class="mt-3">
+                Add New Item
+            </h2>
+
+            <p class="text-muted">
+                Manage Billing Products
+            </p>
+
+        </div>
+
+        <form method="post">
+
+            <div class="mb-4">
+
+                <label asp-for="ItemName" class="form-label fw-bold">
+                    Item Name
+                </label>
+
+                <input asp-for="ItemName"
+                       class="form-control form-control-lg" />
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Price" class="form-label fw-bold">
+                    Price
+                </label>
+
+                <input asp-for="Price"
+                       class="form-control form-control-lg" />
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-success btn-lg w-100">
+
+                Add Item
+
+            </button>
+
+        </form>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success mt-4">
+
+                @ViewBag.Message
+
+            </div>
+        }
+
+    </div>
+
+</div>

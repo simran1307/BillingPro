@@ -1,0 +1,270 @@
+
+
+html,body {
+      font-size: 14px;
+
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #2563eb
+    );
+      min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+
+.navbar {
+    background: #0f172a !important;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.nav-link:hover {
+    color: #38bdf8 !important;
+}
+
+.card {
+    border: none !important;
+    border-radius: 20px !important;
+}
+
+.card-header {
+    border-radius: 20px 20px 0 0 !important;
+}
+.btn-primary {
+   background: #2563EB;
+   border: none;
+   height: 50px;
+   border-radius: 12px;
+}
+.btn-primary:hover {
+   background: #1D4ED8;
+}
+
+
+.table {
+  
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.bill-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.page-title {
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.summary-card {
+    border-radius: 20px;
+    color: white;
+    padding: 25px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.bg-blue {
+    background: #2563eb;
+}
+
+.bg-green {
+    background: #22c55e;
+}
+
+.bg-cyan {
+    background: #0891b2;
+}
+
+
+.login-container {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.login-card {
+  width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 4px 30px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.12);
+}
+
+
+.login-card h1 {
+    text-align: center;
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.login-card p {
+    text-align: center;
+    color: gray;
+    margin-bottom: 30px;
+}
+
+.form-control {
+    height: 50px;
+    border-radius: 12px;
+}
+
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+    color: white;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.btn-success {
+  border: none;
+    border-radius: 12px;
+    height: 55px;
+    font-weight: 600;
+}
+
+.login-action-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 12px;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    box-shadow:
+        0 8px 20px rgba(37,99,235,.25);
+
+    transition: all .3s ease;
+}
+
+.login-action-btn:hover {
+
+    transform: translateY(-2px);
+
+    color: white !important;
+
+    background: linear-gradient(
+        135deg,
+        #1d4ed8,
+        #2563eb
+    );
+}
+
+.add-item-btn {
+   display: inline-flex;
+   align-items: center;
+   gap: 10px;
+   padding: 14px 28px;
+   background: linear-gradient(135deg, #1d4ed8, #2563eb);
+   color: #fff;
+   font-size: 18px;
+   font-weight: 600;
+   text-decoration: none;
+   border-radius: 14px;
+   box-shadow: 0 8px 20px rgba(108, 99, 255, 0.35);
+   transition: all 0.3s ease;
+}
+.add-item-btn i {
+   font-size: 22px;
+}
+.add-item-btn:hover {
+   background: linear-gradient(135deg, #1d4ed8, #f3f2f4);
+   color: #fff;
+   transform: translateY(-3px);
+   box-shadow: 0 12px 28px rgba(108, 99, 255, 0.45);
+}
+.add-item-btn:active {
+   transform: scale(0.97);
+}
+
+
+/* Generate Bill */
+.generate-btn {
+   background: linear-gradient(135deg,#2563eb,#3b82f6);
+   box-shadow: 0 5px 15px rgba(37,99,235,.35);
+}
+.generate-btn:hover {
+   background: linear-gradient(135deg,#1d4ed8,#2563eb);
+   transform: translateY(-2px);
+   color: white !important;
+}
+/* Logout */
+.logout-btn {
+   background: linear-gradient(135deg,#ef4444,#dc2626);
+   box-shadow: 0 5px 15px rgba(220,38,38,.35);
+}
+.logout-btn:hover {
+   background: linear-gradient(135deg,#dc2626,#b91c1c);
+   transform: translateY(-2px);
+   color: white !important;
+}
+
+.nav-btn {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+   padding: 10px 18px;
+   border-radius: 10px;
+   text-decoration: none;
+   font-weight: 600;
+   font-size: 15px;
+   transition: all .3s ease;
+   color: #fff !important;
+   margin-left: 8px;
+}
+/* Register Button */
+.register-btn {
+   background: linear-gradient(135deg, #0EA5E9, #2563EB);
+   box-shadow: 0 5px 15px rgba(37,99,235,.35);
+}
+.register-btn:hover {
+   background: linear-gradient(135deg, #0284C7, #1D4ED8);
+   transform: translateY(-2px);
+}
+/* Login Button */
+.login-btn {
+   background: linear-gradient(135deg, #0EA5E9, #2563EB);
+   box-shadow: 0 5px 15px rgba(37,99,235,.35);
+}
+.login-btn:hover {
+   background: linear-gradient(135deg, #0284C7, #1D4ED8);
+   transform: translateY(-2px);
+}

@@ -1,0 +1,187 @@
+@model BillingWeb.Models.PrepareBillViewModel
+
+<div class="container mt-5">
+
+    <div class="bill-card">
+
+        <h2 class="page-title">
+            📋 Generate Customer Bill
+        </h2>
+        
+        <a asp-controller="Bill"
+  asp-action="AddItem"
+  class="add-item-btn">
+<i class="fas fa-plus-circle"></i>
+<span>Add New Item</span>
+</a>
+
+        <form method="post">
+
+            <div class="row mb-4">
+
+                <div class="col-md-6">
+
+                    <label asp-for="CustomerName" class="form-label fw-bold">
+                        Customer Name
+                    </label>
+
+                    <input asp-for="CustomerName"
+                           class="form-control form-control-lg" />
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label asp-for="CustomerPhone" class="form-label fw-bold">
+                        Customer Phone
+                    </label>
+
+                    <input asp-for="CustomerPhone"
+                           class="form-control form-control-lg" />
+
+                </div>
+
+            </div>
+
+            <h4 class="mb-3">
+                Available Items
+            </h4>
+
+            <table class="table table-hover table-striped align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (₹)</th>
+                        <th>Quantity</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @for (int i = 0; i < Model.Items.Count; i++)
+                    {
+                        <tr>
+
+                            <td>
+                                @Model.Items[i].ItemName
+                            </td>
+
+                            <td>
+                                ₹ @Model.Items[i].Price
+                            </td>
+
+                            <td>
+
+                                <input asp-for="Items[i].ItemId"
+                                       type="hidden" />
+
+                                <input asp-for="Items[i].ItemName"
+                                       type="hidden" />
+
+                                <input asp-for="Items[i].Price"
+                                       type="hidden" />
+<label asp-for="Items[i].Quantity" class="form-label"></label>
+
+                                <input asp-for="Items[i].Quantity"
+                                       class="form-control"
+                                       style="width:120px" />
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+            <div class="text-end mt-4">
+
+                <button type="submit"
+                        class="btn btn-primary btn-lg px-5">
+
+                    Generate Bill
+
+                </button>
+
+            </div>
+
+        </form>
+
+      
+
+@if (ViewBag.Bill != null)
+{
+    var bill = ViewBag.Bill;
+
+    <div class="invoice-card mt-5">
+
+        <div class="text-center">
+            <h2>🧾 Invoice</h2>
+            <p>BillingPro Pvt. Ltd.</p>
+        </div>
+
+        <hr />
+
+        <div class="row mb-3">
+
+            <div class="col-md-6">
+                <strong>Customer:</strong>
+                @bill.CustomerName
+            </div>
+
+            <div class="col-md-6 text-end">
+                <strong>Phone:</strong>
+                @bill.CustomerPhone
+            </div>
+
+        </div>
+
+        <table class="table table-bordered">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach(var item in bill.Items)
+                {
+                    <tr>
+                        <td>@item.ItemName</td>
+                        <td>₹ @item.Price</td>
+                        <td>@item.Quantity</td>
+                        <td>₹ @item.Total</td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+        <div class="text-end">
+
+            <h3>
+                Grand Total:
+                ₹ @bill.GrandTotal
+            </h3>
+
+            <h5 class="text-success">
+                @bill.GrandTotalInWords
+            </h5>
+
+        </div>
+
+    </div>
+}
+    </div>
+
+</div>

@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ⚡ BillingPro</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BillingWeb.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow ">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BillingPro</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                      
+                  <ul class="navbar-nav ms-auto">
+
+@if (Context.Session.GetString("JwtToken") == null)
+{
+    <li class="nav-item me-2">
+<a class="nav-btn register-btn"
+      asp-area=""
+      asp-controller="Account"
+      asp-action="Register">
+<i class="fas fa-user-plus"></i>
+       Register
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-btn login-btn"
+      asp-area=""
+      asp-controller="Account"
+      asp-action="Login">
+<i class="fas fa-sign-in-alt"></i>
+       Login
+</a>
+</li>
+}
+else
+{
+<li class="nav-item me-3"> <span class="nav-link text-white fw-bold">
+     👋 Welcome, @Context.Session.GetString("UserName")
+      </span> </li><li class="nav-item me-3">
+
+</li>
+
+    <li class="nav-item me-2">
+<a class="nav-btn generate-btn"
+      asp-area=""
+      asp-controller="Bill"
+      asp-action="PrepareBill">
+<i class="fas fa-file-invoice"></i>
+       Generate Bill
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-btn logout-btn"
+      asp-area=""
+      asp-controller="Account"
+      asp-action="Logout">
+<i class="fas fa-sign-out-alt"></i>
+       Logout
+</a>
+</li>
+}
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    @if (ViewContext.RouteData.Values["Controller"]?.ToString() == "Account")
+{
+<main role="main" class="pb-3" aria-label="Main content">
+       @RenderBody()
+</main>
+}
+else
+{
+<div class="container">
+<main role="main" class="pb-3 mt-5" aria-label="Main content">
+           @RenderBody()
+</main>
+</div>
+}
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

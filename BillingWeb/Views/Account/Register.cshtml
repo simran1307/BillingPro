@@ -1,0 +1,76 @@
+@model BillingWeb.Models.RegisterViewModel
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="text-center mb-2">
+
+            <div class="logo-circle">
+                ⚡
+            </div>
+
+            <h2 class="mt-2">
+                Create Account
+            </h2>
+
+            <p class="text-muted">
+                Register to access BillingPro
+            </p>
+
+        </div>
+
+        <form method="post">
+
+            <div class="mb-2">
+
+                <label asp-for="UserName"
+                       class="form-label fw-bold">
+                </label>
+
+                <input asp-for="UserName"
+                       class="form-control " />
+
+            </div>
+
+            <div class="mb-2">
+
+                <label asp-for="Password"
+                       class="form-label fw-bold">
+                </label>
+
+                <input asp-for="Password"
+                       type="password"
+                       class="form-control " />
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-success btn-lg w-100">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        @if(ViewBag.Message != null)
+        {
+            <div class="alert alert-success mt-4">
+                @ViewBag.Message
+            </div>
+        }
+
+       <div class="text-center mt-2">
+
+    <p class="text-muted mb-2">
+        Already have an account?
+    </p>
+
+    <a asp-controller="Account"
+       asp-action="Login"
+       class="login-action-btn">
+        Login
+    </a>
+
+</div>

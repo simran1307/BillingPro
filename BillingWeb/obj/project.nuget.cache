@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "oL8VjGks9qg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\SISWARAJ\\BillingSolution\\BillingWeb\\BillingWeb.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SISWARAJ\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
