@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'BillingWeb/**'
+      - '.github/workflows/main_billingweb-simran.yml'
   workflow_dispatch:
 
 jobs:
