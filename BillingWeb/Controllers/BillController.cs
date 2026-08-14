@@ -37,8 +37,7 @@ public class BillController : Controller
 var token =
     HttpContext.Session.GetString("JwtToken");
 
-    
-
+  
 client.DefaultRequestHeaders.Authorization =
     new System.Net.Http.Headers.AuthenticationHeaderValue(
         "Bearer",
@@ -81,6 +80,8 @@ public async Task<IActionResult> PrepareBill(
 
         var token =
     HttpContext.Session.GetString("JwtToken");
+
+   
 
 client.DefaultRequestHeaders.Authorization =
     new System.Net.Http.Headers.AuthenticationHeaderValue(
