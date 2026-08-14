@@ -10,11 +10,14 @@ namespace BillingFunctions;
 public class AddItemFunction
 {
     private readonly SqlService _sqlService;
+    private readonly JwtService _jwtService;
 
     public AddItemFunction(
-        SqlService sqlService)
+        SqlService sqlService,
+        JwtService jwtService)
     {
         _sqlService = sqlService;
+        _jwtService = jwtService;
     }
 
     [Function("AddItem")]
@@ -24,9 +27,45 @@ public class AddItemFunction
             "post")]
         HttpRequestData req)
     {
+        string authHeader =
+            req.Headers.TryGetValues(
+                "Authorization",
+                out var values)
+                    ? values.FirstOrDefault() ?? ""
+                    : "";
+
+        if (!authHeader.StartsWith("Bearer "))
+        {
+            var unauthorized =
+                req.CreateResponse(
+                    HttpStatusCode.Unauthorized);
+
+            await unauthorized.WriteStringAsync(
+                "Missing Token");
+
+            return unauthorized;
+        }
+
+        var token =
+            authHeader.Replace(
+                "Bearer ",
+                "");
+
+        if (!_jwtService.ValidateToken(token))
+        {
+            var unauthorized =
+                req.CreateResponse(
+                    HttpStatusCode.Unauthorized);
+
+            await unauthorized.WriteStringAsync(
+                "Invalid Token");
+
+            return unauthorized;
+        }
+
         string requestBody =
             await new StreamReader(req.Body)
-            .ReadToEndAsync();
+                .ReadToEndAsync();
 
         Item? item =
             JsonConvert.DeserializeObject<Item>(

@@ -11,11 +11,14 @@ namespace BillingFunctions;
 public class GenerateBillFunction
 {
     private readonly SqlService _sqlService;
+    private readonly JwtService _jwtService;
 
     public GenerateBillFunction(
-        SqlService sqlService)
+        SqlService sqlService,
+        JwtService jwtService)
     {
         _sqlService = sqlService;
+        _jwtService = jwtService;
     }
 
     [Function("GenerateBill")]
@@ -25,9 +28,45 @@ public class GenerateBillFunction
             "post")]
         HttpRequestData req)
     {
+        string authHeader =
+            req.Headers.TryGetValues(
+                "Authorization",
+                out var values)
+                    ? values.FirstOrDefault() ?? ""
+                    : "";
+
+        if (!authHeader.StartsWith("Bearer "))
+        {
+            var unauthorized =
+                req.CreateResponse(
+                    HttpStatusCode.Unauthorized);
+
+            await unauthorized.WriteStringAsync(
+                "Missing Token");
+
+            return unauthorized;
+        }
+
+        var token =
+            authHeader.Replace(
+                "Bearer ",
+                "");
+
+        if (!_jwtService.ValidateToken(token))
+        {
+            var unauthorized =
+                req.CreateResponse(
+                    HttpStatusCode.Unauthorized);
+
+            await unauthorized.WriteStringAsync(
+                "Invalid Token");
+
+            return unauthorized;
+        }
+
         string body =
             await new StreamReader(req.Body)
-            .ReadToEndAsync();
+                .ReadToEndAsync();
 
         BillRequest? request =
             JsonConvert.DeserializeObject<BillRequest>(
@@ -93,11 +132,10 @@ public class GenerateBillFunction
                 request.CustomerPhone,
                 response.GrandTotal);
 
-    response.GrandTotalInWords =
-    NumberToWordsHelper.Convert(
-        (int)response.GrandTotal)
-    + " Rupees Only";
-
+        response.GrandTotalInWords =
+            NumberToWordsHelper.Convert(
+                (int)response.GrandTotal)
+            + " Rupees Only";
 
         foreach (var itemToSave in billItemsToSave)
         {
