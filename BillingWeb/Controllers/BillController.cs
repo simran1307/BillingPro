@@ -32,7 +32,17 @@ public class BillController : Controller
 }
 
         var client =
-            _httpClientFactory.CreateClient();
+    _httpClientFactory.CreateClient();
+
+var token =
+    HttpContext.Session.GetString("JwtToken");
+
+    
+
+client.DefaultRequestHeaders.Authorization =
+    new System.Net.Http.Headers.AuthenticationHeaderValue(
+        "Bearer",
+        token);
 
         string json =
            await client.GetStringAsync(
@@ -68,6 +78,14 @@ public async Task<IActionResult> PrepareBill(
 
     var client =
         _httpClientFactory.CreateClient();
+
+        var token =
+    HttpContext.Session.GetString("JwtToken");
+
+client.DefaultRequestHeaders.Authorization =
+    new System.Net.Http.Headers.AuthenticationHeaderValue(
+        "Bearer",
+        token);
 
     var request =
         new GenerateBillRequestViewModel
@@ -143,6 +161,19 @@ public async Task<IActionResult> AddItem(
 
     var client =
         _httpClientFactory.CreateClient();
+
+        var token =
+    HttpContext.Session.GetString("JwtToken");
+
+
+
+client.DefaultRequestHeaders.Authorization =
+    new System.Net.Http.Headers.AuthenticationHeaderValue(
+        "Bearer",
+        token);
+
+
+
 
     var json =
         JsonConvert.SerializeObject(model);
